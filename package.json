@@ -1,19 +1,16 @@
 {
   "name": "backend-challenge",
   "version": "1.0.0",
-  "description": "P'unk Avenue backend node.js challenge",
+  "description": "G2i Node challenge (forkend fromP'unk Avenue backend node.js challenge)",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/punkave/backend-challenge.git"
+    "url": "git+https://github.com/g2i/backend-challenge.git"
   },
-  "author": "P'unk Avenue LLC",
+  "author": "G2i",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/punkave/backend-challenge/issues"
-  },
-  "homepage": "https://github.com/punkave/backend-challenge#readme"
+  "homepage": "https://github.com/g2i/backend-challenge#readme"
 }
