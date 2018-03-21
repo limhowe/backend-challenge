@@ -1,4 +1,4 @@
-## P'unk Avenue Node.js Backend Challenge
+## G2i Node challenge (forked from P'unk Avenue Node.js Backend Challenge)
 
 [Indego](https://www.rideindego.com) is Philadelphia's bike-sharing program, with many bike stations in the city.
 
@@ -6,7 +6,7 @@ The [Indego GeoJSON station status API](https://www.rideindego.com/stations/json
 
 The [Open Weather Map API](https://openweathermap.org/current#name) provides a realtime snapshot of the current weather in a given city. Since Philadelphia is a small geographical area it is sufficient to obtain the weather for a geographical location central to Philadelphia. This API has a free plan, you will need to sign up for an API key.
 
-Using MongoDB, Node.js, Express, [Bluebird](https://npmjs.org/package/bluebird), Lodash and the Linux, Node.js and MongoDB hosting of your choice (see below for hosting details including free options), create a new API server which accumulates data over time and provides access to historical data for both weather and Indego bike availability, supporting the following queries at minimum. Note that it is sufficient to store data at hourly intervals.
+Using MongoDB, Node.js and Express, create a new API server which accumulates data over time and provides access to historical data for both weather and Indego bike availability, supporting the following queries at minimum. Note that it is sufficient to store data at hourly intervals.
 
 *Please note: historical CSV data downloads are available from Indego, however you should not rely on them.* Instead you should build your own node application that downloads fresh data at least once per hour, stores it and implements the API described below.
 
@@ -69,19 +69,13 @@ The `frequency` query parameter, if present, may be `hourly` or `daily`. The API
 ## Unit tests
 
 All of the APIs should have unit test coverage; invoking `npm test` should test your package. We suggest [mocha](https://npmjs.org/package/mocha) but other frameworks are fine.
-
-## Hosting details
-
-You'll need to make your API available on a server that we can communicate with from the office, not just on your laptop. Although this is not a system administration job, we're interested in seeing that you are comfortable with the fundamentals of installing services on Linux and/or working with cloud providers like Heroku.
-
-You might wish to use Linode or Digital Ocean and install both Node and MongoDB on a VPS yourself. Alternatively you might use a combination of Heroku and MLab, both of which have free tiers available.
  
 ## Criteria
 
 Your work will be evaluated primarily on:
 
-* Consistency of coding style (ideally in harmony with our [JavaScript style guide](https://github.com/punkave/best-practices/blob/master/javascript.md))
-* Idiomatic use of `express`, `mongodb`, `bluebird` and `lodash`
+* Consistency of coding style
+* Idiomatic use of `express` and `mongodb`
 * Correct use of promises, including proper error handling. async/await may be used
 * Absence of "callback hell"
 * Efficient MongoDB queries
@@ -90,7 +84,7 @@ Your work will be evaluated primarily on:
 
 ## How to submit your work
 
-Fork this project on github. When you're finished, send us the URL of your public repository and the URL of your running instance of the API. *Consider using `.gitignore` to avoid putting any deployment credentials or API key in your public repository.*
+Fork this project on github. When you're finished, send us the URL of your public repository.
 
 ## Extra credit
 
