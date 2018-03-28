@@ -13,7 +13,8 @@ test.beforeEach('connect and add test data', async t => {
   await connectDB(t);
   try {
     await Promise.all([
-      Station.create(stations),
+      Station.create(stations.time0),
+      Station.create(stations.time1),
       Weather.create(weathers),
       Entry.create(entries),
     ]);
@@ -54,7 +55,7 @@ test.serial('Should correctly give Stations data', async t => {
     .set('Accept', 'application/json');
 
   t.is(res.status, 200);
-  t.deepEqual(stations.length, res.body.stations.length);
+  t.deepEqual(stations.time0.length, res.body.stations.length);
 });
 
 
