@@ -14,7 +14,7 @@ export const stations = [
     name: '15th & Spruce',
     totalDocks: 19,
     kioskType: 1,
-    dataAt: Date('2018-03-26T23:20:01.508Z'),
+    dataAt: '2018-03-26T23:20:01.508Z',
   },
   {
     _id: objectID('5ab98021d329925fa6ab829a'),
@@ -28,7 +28,7 @@ export const stations = [
     name: '38th & Lancaster',
     totalDocks: 8,
     kioskType: 1,
-    dataAt: Date('2018-03-26T23:20:01.508Z'),
+    dataAt: '2018-03-26T23:20:01.508Z',
   },
 ];
 
@@ -57,7 +57,7 @@ export const weathers = [
     clouds: {
       all: 20,
     },
-    dataAt: Date('2018-03-26T23:20:01.508Z'),
+    dataAt: '2018-03-26T23:20:01.508Z',
   },
 ];
 
@@ -66,5 +66,6 @@ export const entries = [
     _id: '5ab99bc1edb09d6f44678aba',
     stations: [objectID('5abbdb2513ec4cbe1171e1e5'), objectID('5ab98021d329925fa6ab829a')],
     weather: objectID('5ab98022d329925fa6ab830d'),
+    dataAt: '2018-03-26T23:20:01.508Z',
   },
 ];

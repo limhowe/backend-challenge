@@ -34,7 +34,7 @@ const importJob = async () => {
       fetch(INDEGO_API_URL).then((response) => response.json()),
       fetch(WEATHER_API_URL).then((response) => response.json()),
     ]);
-    const timeNow = new Date();
+    const timeNow = new Date().toISOString();
     let newEntry = new Entry({
       _id: new mongoose.Types.ObjectId(),
       dataAt: timeNow,

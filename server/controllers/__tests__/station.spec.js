@@ -26,7 +26,7 @@ test.afterEach.always(async t => {
   await dropDB(t);
 });
 
-test.serial('Should check if given time is date string', async t => {
+test.serial('Should check if given time is ISO 8601 string', async t => {
   t.plan(1);
 
   const res = await request(app)
@@ -50,9 +50,19 @@ test.serial('Should correctly give Stations data', async t => {
   t.plan(2);
 
   const res = await request(app)
-    .get('/api/stations?at=2018-03-26T23:00:00.508Z')
+    .get('/api/stations?at=2018-03-26T22:40:00.508Z')
     .set('Accept', 'application/json');
 
   t.is(res.status, 200);
   t.deepEqual(stations.length, res.body.stations.length);
+});
+
+
+test.serial('Should return 404 when no data', async t => {
+  t.plan(1);
+
+  const res = await request(app)
+    .get('/api/stations?at=2014-01-02T11:00:00.508Z')
+    .set('Accept', 'application/json');
+  t.is(res.status, 404);
 });
