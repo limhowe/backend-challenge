@@ -79,3 +79,55 @@ test.serial('Should return correct station', async t => {
   t.deepEqual(stations.time0[1].totalDocks, res.body.station.totalDocks);
   t.deepEqual(stations.time0[1].bikesAvailable, res.body.station.bikesAvailable);
 });
+
+
+test.serial('Should check if given time is ISO 8601 string for single Station', async t => {
+  t.plan(1);
+
+  const res = await request(app)
+    .get('/api/stations/3011?at=wewe')
+    .set('Accept', 'application/json');
+
+  t.is(res.status, 422);
+});
+
+test.serial('Should check time parameter absence for single Station', async t => {
+  t.plan(1);
+
+  const res = await request(app)
+    .get('/api/stations/3011')
+    .set('Accept', 'application/json');
+
+  t.is(res.status, 422);
+});
+
+
+test.serial('Should check range is specified for single Station -- Missing To', async t => {
+  t.plan(1);
+
+  const res = await request(app)
+    .get('/api/stations/3011?from=2018-03-26T22:40:00.508Z')
+    .set('Accept', 'application/json');
+
+  t.is(res.status, 422);
+});
+
+test.serial('Should check range is specified for single Station -- Missing From', async t => {
+  t.plan(1);
+
+  const res = await request(app)
+    .get('/api/stations/3011?to=2018-03-26T22:40:00.508Z')
+    .set('Accept', 'application/json');
+
+  t.is(res.status, 422);
+});
+
+test.serial('Should check range is specified with dates for single Station', async t => {
+  t.plan(1);
+
+  const res = await request(app)
+    .get('/api/stations/3011?from=awfwef&to=awefw')
+    .set('Accept', 'application/json');
+
+  t.is(res.status, 422);
+});

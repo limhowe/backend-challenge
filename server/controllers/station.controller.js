@@ -42,6 +42,10 @@ export async function getStations(req, res) {
  */
 async function getSingleSnapShot(at, kioskId) {
   const nextTickDates = DateManager.getDateOfNextHour(at);
+  /*
+    We're assuming there's one snapshot data per hour.
+    So trying to fetch data via Entry, not via Station directly
+  */
   const entry = await Entry.findOne({
     dataAt: {
       $gte: nextTickDates.current,
