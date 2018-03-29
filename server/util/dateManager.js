@@ -6,3 +6,10 @@ export function getDateOfNextHour(dateString) {
     next: moment(dateString).add(1, 'hours').toDate(),
   };
 }
+
+export function getRange(from, to) {
+  return {
+    current: moment(from).toDate(),
+    next: moment(to).toDate(),
+  };
+}

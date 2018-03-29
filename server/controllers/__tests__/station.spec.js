@@ -2,7 +2,6 @@ import test from 'ava';
 import request from 'supertest';
 import app from '../../server';
 import Station from '../../models/station';
-import Weather from '../../models/weather';
 import Entry from '../../models/entry';
 import { connectDB, dropDB } from '../../util/test-helpers';
 
@@ -15,7 +14,7 @@ test.beforeEach('connect and add test data', async t => {
     await Promise.all([
       Station.create(stations.time0),
       Station.create(stations.time1),
-      Weather.create(weathers),
+      Station.create(stations.time2),
       Entry.create(entries),
     ]);
   } catch (err) {
@@ -80,7 +79,6 @@ test.serial('Should return correct station', async t => {
   t.deepEqual(stations.time0[1].bikesAvailable, res.body.station.bikesAvailable);
 });
 
-
 test.serial('Should check if given time is ISO 8601 string for single Station', async t => {
   t.plan(1);
 
@@ -100,7 +98,6 @@ test.serial('Should check time parameter absence for single Station', async t =>
 
   t.is(res.status, 422);
 });
-
 
 test.serial('Should check range is specified for single Station -- Missing To', async t => {
   t.plan(1);
@@ -130,4 +127,24 @@ test.serial('Should check range is specified with dates for single Station', asy
     .set('Accept', 'application/json');
 
   t.is(res.status, 422);
+});
+
+test.serial('Should correctly return stations for given date range - hourly', async t => {
+  t.plan(2);
+
+  const res = await request(app)
+    .get('/api/stations/3011?from=2018-03-24T22:40:00.508Z&to=2018-03-29T22:40:00.508Z')
+    .set('Accept', 'application/json');
+  t.is(res.status, 200);
+  t.deepEqual(res.body.length, 3);
+});
+
+test.serial('Should correctly return stations for given date range - daily', async t => {
+  t.plan(2);
+
+  const res = await request(app)
+    .get('/api/stations/3011?from=2018-03-24T22:40:00.508Z&to=2018-03-29T22:40:00.508Z&frequency=daily')
+    .set('Accept', 'application/json');
+  t.is(res.status, 200);
+  t.deepEqual(res.body.length, 2);
 });

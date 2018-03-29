@@ -1,7 +1,7 @@
-import Station from '../models/station'; //eslint-disable-line
-import Weather from '../models/weather'; //eslint-disable-line
+import Station from '../models/station';
 import Entry from '../models/entry';
 import * as DateManager from '../util/dateManager';
+import * as StationService from '../services/station.service';
 
 /**
  * Get all stations
@@ -13,13 +13,12 @@ export async function getStations(req, res) {
   const nextTickDates = DateManager.getDateOfNextHour(req.query.at);
   try {
     const entry = await Entry.findOne({
-      dataAt: {
+      at: {
         $gte: nextTickDates.current,
         $lt: nextTickDates.next,
       },
     }, { stations: 1, weather: 1 })
-      .populate('stations', '-_id -__v -dataAt')
-      .populate('weather', '-_id -__v -dataAt')
+      .populate('stations', '-_id -__v -at')
       .exec();
     if (!entry) {
       res.status(404).send('Not found requeted data');
@@ -47,18 +46,17 @@ async function getSingleSnapShot(at, kioskId) {
     So trying to fetch data via Entry, not via Station directly
   */
   const entry = await Entry.findOne({
-    dataAt: {
+    at: {
       $gte: nextTickDates.current,
       $lt: nextTickDates.next,
     },
-  }, { weather: 1, dataAt: 1 })
-  .populate('weather', '-_id -__v -dataAt')
+  }, { weather: 1, at: 1 })
   .exec();
   if (!entry) { return null; }
 
   const station = await Station.findOne({
     kioskId,
-    dataAt: entry.dataAt,
+    at: entry.at,
   }, { _id: 0, __v: 0 })
   .exec();
   if (!station) { return null; }
@@ -67,16 +65,6 @@ async function getSingleSnapShot(at, kioskId) {
     station,
     weather: entry.weather,
   };
-}
-
-/**
- * Get a snapshot of one station at a specific time
- * @param at
- * @param kioskId
- * @returns array
- */
-async function geSnapShots(from, to, kioskId, frequency = 'hourly') { // eslint-disable-line
-  return [];
 }
 
 /**
@@ -98,14 +86,11 @@ export async function getStation(req, res) {
         });
       }
     } else {
-      const data = geSnapShots(req.query.from, req.query.to, req.params.kioskId, req.query.frequency);
+      const data = await StationService.getSnapShots(req.query.from, req.query.to, req.params.kioskId, req.query.frequency);
       if (!data) {
         res.status(404).send('Not found requeted data');
       } else {
-        res.json({
-          stations: data.stations,
-          weather: data.weather,
-        });
+        res.json(data);
       }
     }
   } catch (err) {
