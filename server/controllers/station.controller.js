@@ -35,19 +35,76 @@ export async function getStations(req, res) {
 }
 
 /**
- * Get a single station
+ * Get a snapshot of one station at a specific time
+ * @param at
+ * @param kioskId
+ * @returns object
+ */
+async function getSingleSnapShot(at, kioskId) {
+  const nextTickDates = DateManager.getDateOfNextHour(at);
+  const entry = await Entry.findOne({
+    dataAt: {
+      $gte: nextTickDates.current,
+      $lt: nextTickDates.next,
+    },
+  }, { weather: 1, dataAt: 1 })
+  .populate('weather', '-_id -__v -dataAt')
+  .exec();
+  if (!entry) { return null; }
+
+  const station = await Station.findOne({
+    kioskId,
+    dataAt: entry.dataAt,
+  }, { _id: 0, __v: 0 })
+  .exec();
+  if (!station) { return null; }
+
+  return {
+    station,
+    weather: entry.weather,
+  };
+}
+
+/**
+ * Get a snapshot of one station at a specific time
+ * @param at
+ * @param kioskId
+ * @returns array
+ */
+async function geSnapShots(from, to, kioskId, frequency = 'hourly') { // eslint-disable-line
+  return [];
+}
+
+/**
+ * Get snapshots for single station
  * @param req
  * @param res
  * @returns void
  */
 export async function getStation(req, res) {
-  if (req.query.at) {
-    res.json({
-      at: true,
-    });
-  } else {
-    res.json({
-      from: true,
-    });
+  try {
+    if (req.query.at) {
+      const data = await getSingleSnapShot(req.query.at, req.params.kioskId);
+      if (!data) {
+        res.status(404).send('Not found requeted data');
+      } else {
+        res.json({
+          station: data.station,
+          weather: data.weather,
+        });
+      }
+    } else {
+      const data = geSnapShots(req.query.from, req.query.to, req.params.kioskId, req.query.frequency);
+      if (!data) {
+        res.status(404).send('Not found requeted data');
+      } else {
+        res.json({
+          stations: data.stations,
+          weather: data.weather,
+        });
+      }
+    }
+  } catch (err) {
+    res.status(500).send(err);
   }
 }

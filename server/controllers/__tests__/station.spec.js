@@ -58,7 +58,6 @@ test.serial('Should correctly give Stations data', async t => {
   t.deepEqual(stations.time0.length, res.body.stations.length);
 });
 
-
 test.serial('Should return 404 when no data', async t => {
   t.plan(1);
 
@@ -66,4 +65,17 @@ test.serial('Should return 404 when no data', async t => {
     .get('/api/stations?at=2014-01-02T11:00:00.508Z')
     .set('Accept', 'application/json');
   t.is(res.status, 404);
+});
+
+test.serial('Should return correct station', async t => {
+  t.plan(5);
+
+  const res = await request(app)
+    .get('/api/stations/3011?at=2018-03-26T22:40:00.508Z')
+    .set('Accept', 'application/json');
+  t.is(res.status, 200);
+  t.deepEqual(stations.time0[1].kioskId, res.body.station.kioskId);
+  t.deepEqual(stations.time0[1].name, res.body.station.name);
+  t.deepEqual(stations.time0[1].totalDocks, res.body.station.totalDocks);
+  t.deepEqual(stations.time0[1].bikesAvailable, res.body.station.bikesAvailable);
 });
