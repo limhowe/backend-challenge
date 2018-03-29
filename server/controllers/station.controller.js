@@ -32,10 +32,7 @@ export async function getStation(req, res) {
       if (!data) {
         res.status(404).send('Not found requeted data');
       } else {
-        res.json({
-          station: data.station,
-          weather: data.weather,
-        });
+        res.json(data);
       }
     } else {
       const data = await StationService.getSnapShots(req.query.from, req.query.to, req.params.kioskId, req.query.frequency);
