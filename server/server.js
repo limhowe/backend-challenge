@@ -32,7 +32,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
-// import importJob from './jobs/import.job';
+import runJob from './jobs/run.job';
 
 // Import required modules
 import routes from '../client/routes';
@@ -50,8 +50,6 @@ mongoose.connection.openUri(serverConfig.mongoURL, (error) => {
     throw error;
   }
 });
-
-// importJob();
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
@@ -148,5 +146,7 @@ app.listen(serverConfig.port, (error) => {
     console.log(`MERN is running on port: ${serverConfig.port}! Build something amazing!`); // eslint-disable-line
   }
 });
+
+runJob();
 
 export default app;
