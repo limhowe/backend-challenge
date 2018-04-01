@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 // Import Style
@@ -14,7 +15,6 @@ function StationListItem(props) {
       </h3>
       <p className={styles['station-type']}>KiskType: {props.station.kioskType}</p>
       <p className={styles['station-docs']}>TotalDocks : {props.station.totalDocks}</p>
-      <hr className={styles.divider} />
     </div>
   );
 }
@@ -23,7 +23,7 @@ StationListItem.propTypes = {
   station: PropTypes.shape({
     name: PropTypes.string.isRequired,
     kioskType: PropTypes.number.isRequired,
-    totalDocks: PropTypes.string.isRequired,
+    totalDocks: PropTypes.number.isRequired,
     kioskId: PropTypes.string.isRequired,
   }).isRequired,
 };

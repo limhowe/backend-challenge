@@ -16,7 +16,7 @@ export async function getAllStations(at) {
     },
   })
   .select('-_id -__v -weather._id')
-  .populate('stations', '-_id -__v -at')
+  .populate('stations', '-_id -__v -_entry -at')
   .exec();
   if (!entry) { return null; }
 

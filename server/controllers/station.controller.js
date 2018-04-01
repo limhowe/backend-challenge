@@ -10,7 +10,12 @@ export async function getStations(req, res) {
   try {
     const data = await StationService.getAllStations(req.query.at);
     if (!data) {
-      res.status(404).send('Not found requeted data');
+      res.status(404).json({
+        err: {
+          code: 404,
+          msg: 'Not found requeted data',
+        },
+      });
     } else {
       res.json(data);
     }
@@ -30,14 +35,24 @@ export async function getStation(req, res) {
     if (req.query.at) {
       const data = await StationService.getSingleSnapShot(req.query.at, req.params.kioskId);
       if (!data) {
-        res.status(404).send('Not found requeted data');
+        res.status(404).json({
+          err: {
+            code: 404,
+            msg: 'Not found requeted data',
+          },
+        });
       } else {
         res.json(data);
       }
     } else {
       const data = await StationService.getSnapShots(req.query.from, req.query.to, req.params.kioskId, req.query.frequency);
       if (!data) {
-        res.status(404).send('Not found requeted data');
+        res.status(404).json({
+          err: {
+            code: 404,
+            msg: 'Not found requeted data',
+          },
+        });
       } else {
         res.json(data);
       }

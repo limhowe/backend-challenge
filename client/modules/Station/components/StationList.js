@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Import Components
 import StationListItem from './StationListItem/StationListItem';
@@ -10,7 +11,7 @@ function StationList(props) {
         props.stations.map(station => (
           <StationListItem
             station={station}
-            key={station.kisokId}
+            key={station.kioskId}
           />
         ))
       }
@@ -22,7 +23,7 @@ StationList.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     kioskType: PropTypes.number.isRequired,
-    totalDocks: PropTypes.string.isRequired,
+    totalDocks: PropTypes.number.isRequired,
     kioskId: PropTypes.string.isRequired,
   })).isRequired,
 };

@@ -1,7 +1,7 @@
 export default {
   locale: 'en',
   messages: {
-    siteTitle: 'MERN Starter Blog',
+    siteTitle: 'MERN',
     addStation: 'Add Station',
     switchLanguage: 'Switch Language',
     twitterMessage: 'We are on Twitter',

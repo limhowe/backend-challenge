@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 
 // Import Style
 import styles from './Header.css';
@@ -18,26 +19,15 @@ export function Header(props, context) {
           {languageNodes}
         </ul>
       </div>
-      <div className={styles.content}>
-        <h1 className={styles['site-title']}>
-          <Link to="/" ><FormattedMessage id="siteTitle" /></Link>
-        </h1>
-        {
-          context.router.isActive('/', true)
-            ? <a className={styles['add-station-button']} href="#" onClick={props.toggleAddStation}><FormattedMessage id="addStation" /></a>
-            : null
-        }
-      </div>
     </div>
   );
 }
 
 Header.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
 
 Header.propTypes = {
-  toggleAddStation: PropTypes.func.isRequired,
   switchLanguage: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
 };

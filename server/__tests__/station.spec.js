@@ -1,12 +1,12 @@
 import test from 'ava';
 import request from 'supertest';
-import app from '../../server';
-import Station from '../../models/station';
-import Entry from '../../models/entry';
-import { connectDB, dropDB } from '../../util/test-helpers';
+import app from '../server';
+import Station from '../models/station';
+import Entry from '../models/entry';
+import { connectDB, dropDB } from '../util/test-helpers';
 
 // Initial data to be added into test db
-import { stations, entries } from '../../util/dummyData';
+import { stations, entries } from '../util/dummyData';
 
 test.beforeEach('connect and add test data', async t => {
   await connectDB(t);

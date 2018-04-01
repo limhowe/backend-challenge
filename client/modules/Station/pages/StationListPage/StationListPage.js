@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Import Components
@@ -38,14 +39,14 @@ StationListPage.propTypes = {
   stations: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     kioskType: PropTypes.number.isRequired,
-    totalDocks: PropTypes.string.isRequired,
+    totalDocks: PropTypes.number.isRequired,
     kioskId: PropTypes.string.isRequired,
   })).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
 StationListPage.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(StationListPage);
