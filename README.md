@@ -5,16 +5,14 @@
   npm install
   npm start
 ```
+**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm3` is required to install dependencies properly.
 
 ## With UI.
 
 ```
   http://localhost:8000/?at=2017-11-01T11:00:00
 ```
-Above Url shows result if there's data in the specified time.( within 1 hour range. )
-If not, it will be redirected to 404 page.
-
-**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm3` is required to install dependencies properly.
+**Note :**  bove Url shows result if there's data in the specified time.( within 1 hour range.) If not, it will be redirected to 404 page.
 
 ## Available Commands
 
