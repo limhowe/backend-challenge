@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
+import NotFound from './modules/NotFound/NotFound';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -30,5 +31,6 @@ export default (
         });
       }}
     />
+    <Route path='*' exact={true} component={NotFound} />
   </Route>
 );

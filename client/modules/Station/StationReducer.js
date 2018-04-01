@@ -1,4 +1,4 @@
-import { ADD_STATIONS } from './StationActions';
+import { ADD_STATIONS, ERR_STATIONS } from './StationActions';
 
 // Initial State
 const initialState = { data: [] };
@@ -8,6 +8,11 @@ const StationReducer = (state = initialState, action) => {
     case ADD_STATIONS :
       return {
         data: action.stations,
+      };
+    case ERR_STATIONS:
+      return {
+        data: [],
+        err: 404,
       };
     default:
       return state;

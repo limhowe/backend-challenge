@@ -13,7 +13,8 @@ import { getStations } from '../../StationReducer';
 
 class StationListPage extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchStations());
+    const { at } = this.props.location.query;
+    this.props.dispatch(fetchStations(at));
   }
 
   render() {
