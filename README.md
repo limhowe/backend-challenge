@@ -1,3 +1,29 @@
+
+## Quickstart
+
+```
+  npm install
+  npm start
+```
+
+## With UI.
+
+```
+  http://localhost:8000/?at=2017-11-01T11:00:00
+```
+Above Url shows result if there's data in the specified time.( within 1 hour range. )
+If not, it will be redirected to 404 page.
+
+**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm3` is required to install dependencies properly.
+
+## Available Commands
+
+1. `npm run start` - starts the development server with hot reloading enabled
+
+3. `npm run test` - start the test runner
+
+4. `npm run watch:test` - start the test runner with watch mode
+
 ## G2i Node challenge (forked from P'unk Avenue Node.js Backend Challenge)
 
 [Indego](https://www.rideindego.com) is Philadelphia's bike-sharing program, with many bike stations in the city.
@@ -65,27 +91,3 @@ For this last response, the returned JSON value should be an array of values in 
 ```
 
 The `frequency` query parameter, if present, may be `hourly` or `daily`. The API should respond with only one entry from each hour or day. For `hourly` this should be the first entry on or after the top of the hour. For `daily` it should be the first entry on or after noon, Philadelphia time. If `frequency` is absent, `hourly` is the default.
-
-
-## Quickstart
-
-```
-  npm install
-  npm start
-```
-
-**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm3` is required to install dependencies properly.
-
-## Available Commands
-
-1. `npm run start` - starts the development server with hot reloading enabled
-
-2. `npm run bs` - bundles the code and starts the production server
-
-3. `npm run test` - start the test runner
-
-4. `npm run watch:test` - start the test runner with watch mode
-
-5. `npm run cover` - generates test coverage report
-
-6. `npm run lint` - runs linter to check for lint errors
